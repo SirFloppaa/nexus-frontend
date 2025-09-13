@@ -1,154 +1,78 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nexus Bot · Dashboard</title>
-  <style>
-    body {
-      margin:0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color:#fff;
-      overflow-x:hidden;
-    }
-    header {
-      display:flex; flex-direction:column; align-items:center; padding:30px; text-align:center;
-      position:relative;
-    }
-    header .logo {
-      width:130px; height:130px; border-radius:50%;
-      box-shadow:0 0 40px rgba(88,101,242,0.8);
-      margin-bottom:15px;
-    }
-    h1 {margin:0;font-size:2.2rem;}
-    p {margin:6px 0; color:#94a3b8;}
-    nav {margin-top:15px;}
-    nav a {margin:0 12px; color:#cbd5e1; text-decoration:none; font-weight:600; transition:0.3s;}
-    nav a:hover {color:#fff;}
-    .buttons {margin-top:20px;}
-    .btn {
-      background: linear-gradient(90deg,#5865f2,#3b82f6);
-      border:none; padding:12px 20px; border-radius:10px; color:white;
-      cursor:pointer; font-weight:600; font-size:15px;
-      transition:0.3s; box-shadow:0 0 15px rgba(88,101,242,0.6);
-    }
-    .btn:hover {transform:scale(1.08); box-shadow:0 0 25px rgba(88,101,242,1);}
-    .btn.secondary {background:transparent; border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; box-shadow:none;}
-    .card {
-      background:rgba(255,255,255,0.05);
-      margin:30px auto; padding:25px; border-radius:14px;
-      max-width:1000px;
-      box-shadow:0 0 25px rgba(0,0,0,0.5);
-      transition:0.3s;
-    }
-    .card:hover {transform:translateY(-6px);}
-    .features, .dash-features {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px; margin-top:20px;
-    }
-    .feature {
-      background:rgba(255,255,255,0.07); padding:20px; border-radius:12px; text-align:center;
-      transition:0.3s; font-size:14px;
-    }
-    .feature:hover {background:rgba(255,255,255,0.15); transform:scale(1.05);}
-    footer {
-      text-align:center; padding:25px; font-size:14px; color:#94a3b8;
-      margin-top:40px; border-top:1px solid rgba(255,255,255,0.1);
-    }
-    .hidden {display:none;}
-    /* Yan ışık efektleri */ 
-    body::before, body::after {
-      content:""; position:fixed; top:0; width:300px; height:100%;
-      background:radial-gradient(circle,#3b82f6 0,transparent 70%);
-      z-index:-1; filter:blur(120px);
-    }
-    body::before {left:-150px;} body::after {right:-150px;}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Bot — Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <img src="indir (10).jpg" alt="Bot Logosu" class="logo">
-    <h1>Nexus Bot</h1>
-    <p>Sunucunuza güç katan moderasyon ve eğlence botu</p>
-    <nav>
-      <a href="#home">Anasayfa</a>
-      <a href="#features">Özellikler</a>
-      <a href="#invite">Davet Et</a>
-      <a href="#dashboard" id="dashLink" class="hidden">Dashboard</a>
-    </nav>
-    <div class="buttons">
-      <button class="btn" id="loginBtn">Discord ile Giriş</button>
-      <button class="btn secondary hidden" id="inviteBtn">Botu Sunucuya Davet Et</button>
+<header class="topbar">
+  <div class="left">
+    <img src="logo.jpg" alt="Nexus Logo" class="logo">
+    <div class="brand">
+      <div class="brand-title">Nexus Bot</div>
+      <div class="brand-sub">Moderasyon & Eğlence</div>
     </div>
-  </header>
+  </div>
+  <nav class="navlinks">
+    <a href="#home">Ana Sayfa</a>
+    <a href="#features">Özellikler</a>
+    <a href="#invite">Davet Et</a>
+    <a href="#dashboard" id="dashNav" class="hidden">Dashboard</a>
+  </nav>
+  <div class="right">
+    <button id="loginBtn" class="btn primary">Discord ile Giriş</button>
+  </div>
+</header>
 
-  <main>
-    <section id="home" class="card">
-      <h2>Hoşgeldin!</h2>
-      <p>Nexus Bot'u yönetmek için Discord hesabınla giriş yap. Giriş yaptıktan sonra botu sunucuna davet edebilirsin.</p>
-    </section>
+<main id="home" class="container">
+  <section class="hero">
+    <img src="logo.jpg" alt="logo" class="hero-logo">
+    <h1 class="hero-title">Nexus Bot</h1>
+    <p class="hero-desc">Sunucunuza güç katan moderasyon, otomasyon ve eğlence botu 🚀</p>
+    <div class="hero-cta">
+      <button id="loginBtnHero" class="btn primary">Discord ile Giriş</button>
+      <a id="inviteBtn" class="btn ghost hidden" href="#" target="_blank">Botu Davet Et</a>
+    </div>
+  </section>
 
-    <section id="features" class="card">
-      <h2>Bot Özellikleri</h2>
-      <div class="features">
-        <div class="feature">🚀 <br><strong>Hızlı & Güçlü</strong><br>Komutlara anında yanıt verir.</div>
-        <div class="feature">🛡️ <br><strong>Tam Moderasyon</strong><br>Sunucunuzu güvende tutar.</div>
-        <div class="feature">🎉 <br><strong>Eğlence Komutları</strong><br>Oyunlar ve eğlenceli araçlar.</div>
-        <div class="feature">⚙️ <br><strong>Otomatik Sistemler</strong><br>Hoşgeldin mesajı, oto-rol vb.</div>
+  <section id="features" class="features">
+    <h2>Özellikler</h2>
+    <div class="cards">
+      <div class="card"><div class="emoji">⚡</div><h3>Hızlı & Güçlü</h3><p>Komutlara anında yanıt.</p></div>
+      <div class="card"><div class="emoji">🛡️</div><h3>Tam Moderasyon</h3><p>Sunucunuzu güvende tutar.</p></div>
+      <div class="card"><div class="emoji">🎮</div><h3>Eğlence Komutları</h3><p>Oyunlar ve etkileşimler.</p></div>
+      <div class="card"><div class="emoji">🤖</div><h3>Otomatik Sistemler</h3><p>Oto-rol, hoşgeldin, zamanlı görevler.</p></div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dashboard hidden">
+    <aside class="sidebar">
+      <ul>
+        <li class="active" data-section="general">Genel Ayarlar</li>
+        <li data-section="moderation">Moderasyon</li>
+        <li data-section="fun">Eğlence</li>
+        <li data-section="autorole">Oto-Rol</li>
+        <li data-section="stats">İstatistikler</li>
+      </ul>
+    </aside>
+    <section class="panel">
+      <div id="panel-content">
+        <h2>Dashboard</h2>
+        <p id="welcomeText">Henüz giriş yapılmadı.</p>
+        <div id="userCard" class="usercard hidden"></div>
+        <div id="serverGrid" class="server-grid"></div>
       </div>
     </section>
+  </section>
 
-    <section id="invite" class="card">
-      <h2>Botu Sunucuna Davet Et</h2>
-      <p>Giriş yaptıktan sonra aşağıdaki butona tıklayarak Nexus Bot'u sunucuna ekleyebilirsin.</p>
-      <button class="btn secondary" onclick="discordInvite()">Botu Davet Et</button>
-    </section>
-
-    <section id="dashboard" class="card hidden">
-      <h2>Dashboard</h2>
-      <div id="userInfo"></div>
-      <div class="dash-features">
-        <div class="feature">⚙️ <br><strong>Prefix Ayarı</strong><br>Botun prefixini değiştirin.</div>
-        <div class="feature">👤 <br><strong>Oto Rol</strong><br>Sunucuya girenlere otomatik rol verin.</div>
-        <div class="feature">💬 <br><strong>Hoşgeldin Mesajı</strong><br>Sunucuya özel hoşgeldin mesajı ayarlayın.</div>
-        <div class="feature">📊 <br><strong>Sunucu İstatistikleri</strong><br>Üye sayısı, aktiflik grafikleri.</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Nexus Bot. Tüm hakları saklıdır.
+  <footer class="site-footer">
+    <div>© <span id="year"></span> Nexus Bot</div>
+    <div class="links"><a href="#">GitHub</a> · <a href="#">Destek</a></div>
   </footer>
+</main>
 
-  <script>
-    const CONFIG = {
-      CLIENT_ID: '1416361728249172069',
-      BOT_PERMISSIONS: '8',
-      BOT_SCOPES: 'bot%20applications.commands'
-    };
-
-    const loginBtn = document.getElementById('loginBtn');
-    const inviteBtn = document.getElementById('inviteBtn');
-    const dashLink = document.getElementById('dashLink');
-    const dashboard = document.getElementById('dashboard');
-    const userInfo = document.getElementById('userInfo');
-
-    function discordInvite(){
-      const url = `https://discord.com/oauth2/authorize?client_id=${CONFIG.CLIENT_ID}&permissions=${CONFIG.BOT_PERMISSIONS}&scope=${CONFIG.BOT_SCOPES}`;
-      window.open(url, '_blank');
-      // Bot davet edildikten sonra dashboard aç
-      inviteBtn.classList.add('hidden');
-      dashboard.classList.remove('hidden');
-      dashLink.classList.remove('hidden');
-    }
-
-    loginBtn.addEventListener('click', () => {
-      // Simülasyon: giriş yapıldı
-      loginBtn.classList.add('hidden');
-      inviteBtn.classList.remove('hidden');
-      userInfo.innerHTML = '<p><strong>Hoşgeldin!</strong> Discord hesabınla giriş yaptın.</p>';
-    });
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
